@@ -8,6 +8,9 @@ return Customer.findOne({email:email.toLowerCase()});
 export const createCustomer=(data:any):Promise<ICustomer>=>{
     return Customer.create(data)
 }
-export const getCustomer=():Promise<ICustomer[]>=>{
-    return Customer.find()
+export const getCustomer=(skip:number, limit:number):Promise<ICustomer[]>=>{
+    return Customer.find().skip(skip).limit(limit).sort({createdAt: -1})
+}
+export const countCustomer=():Promise<number>=>{
+    return Customer.countDocuments()
 }

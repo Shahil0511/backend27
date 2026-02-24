@@ -13,6 +13,8 @@ export const createCustomer = asyncHandler(async(req:Request, res: Response )=>{
 })
 
 export const getCustomer = asyncHandler(async(req:Request, res:Response)=>{
-      const customer = await getCustomerService();
-      res.status(201).json({sucess:true, customer})
+      const page = parseInt(req.query.page as string)||1
+      const limit = parseInt(req.query.limit as string)||10
+      const customer = await getCustomerService(page, limit);
+      res.status(200).json({sucess:true, customer})
 })
