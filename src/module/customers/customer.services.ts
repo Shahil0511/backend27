@@ -1,7 +1,7 @@
 
 import { ApiError } from '../../utils/ApiError.js';
 
-import { findCustomerByEmail, createCustomer, getCustomer,countCustomer } from './customer.repository.js';
+import { findCustomerByEmail, createCustomer, getAllCustomer, countAllCustomer } from './customer.repository.js';
 
 export const createCustomerService = async (data: any) => {
   const existing = await findCustomerByEmail(data.email);
@@ -10,13 +10,20 @@ export const createCustomerService = async (data: any) => {
   return await createCustomer(data);
 }
 
-export const getCustomerService = async (page: number, limit: number) => {
-  const skip = (page-1)*limit;
-   
-  const customer = await getCustomer(skip, limit)
-  const total = await countCustomer()
-   return {
-    data: customer,
+export const getAllCustomerService = async (page: number, limit: number, search?: string) => {
+  const skip = (page - 1) * limit;
+  const query: any = {};
+
+  if (search) {
+    query.name = { $regex: search, $options: "i" };
+  }
+
+  const [customers, total] = await Promise.all([
+    getAllCustomer(query, skip, limit),
+    countAllCustomer(query),
+  ]);
+  return {
+    data: customers,
     total,
     page,
     totalPages: Math.ceil(total / limit),

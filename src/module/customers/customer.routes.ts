@@ -8,5 +8,5 @@ import * as controller from './customer.controller.js';
 const router = express.Router();
 
 router.post("/create-customer", verifyToken, controller.createCustomer)
-router.get("/",verifyToken,controller.getCustomer)
+router.get("/getall-customer",verifyToken,controller.getAllCustomer)
 export default router;
