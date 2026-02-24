@@ -1,7 +1,7 @@
 
 import { ApiError } from '../../utils/ApiError.js';
 
-import { findCustomerByEmail, createCustomer, getAllCustomer, countAllCustomer } from './customer.repository.js';
+import { findCustomerByEmail, createCustomer, getAllCustomer, countAllCustomer,findCustomerById } from './customer.repository.js';
 
 export const createCustomerService = async (data: any) => {
   const existing = await findCustomerByEmail(data.email);
@@ -28,4 +28,10 @@ export const getAllCustomerService = async (page: number, limit: number, search?
     page,
     totalPages: Math.ceil(total / limit),
   };
+}
+
+export const getCustomerByIdServices=async(id:string)=>{
+  const customer = await findCustomerById(id);
+  if(!customer) throw new ApiError(404, "Customer Not Found");
+  return customer;
 }

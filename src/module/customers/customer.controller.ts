@@ -1,7 +1,7 @@
 import { ApiError } from "../../utils/ApiError.js";
 import { asyncHandler } from "../../utils/AsyncHandler.js";
 import { Request, Response } from "express";
-import { createCustomerService, getAllCustomerService } from "./customer.services.js";
+import { createCustomerService, getAllCustomerService, getCustomerByIdServices } from "./customer.services.js";
 
 export const createCustomer = asyncHandler(async (req: Request, res: Response) => {
       const { firstName, lastName, email, phone, addresses } = req.body;
@@ -21,4 +21,13 @@ export const getAllCustomer = asyncHandler(async (req: Request, res: Response) =
             success: true,
             ...result,
       });
+})
+
+export const getCustomerById = asyncHandler(async (req: Request, res: Response)=>{
+      const {id} = req.params;
+      const result = await getCustomerByIdServices(id as string);
+      res.status(200).json({
+            sucess:true,
+            result
+      })
 })

@@ -24,3 +24,7 @@ export const getAllCustomer = (
 export const countAllCustomer = (query: any): Promise<number> => {
     return Customer.countDocuments(query);
 };
+
+export const findCustomerById =(id:string):Promise<ICustomer|null>=>{
+    return Customer.findById(id)
+}
