@@ -1,9 +1,9 @@
-import { Schema, model, Document, Model } from "mongoose";
+import { Schema, model, Document, Model,Types } from "mongoose";
 
 export interface ISubCategory extends Document {
   name: string;
   slug: string;
-  category: Schema.Types.ObjectId;
+  category: Types.ObjectId;
   isActive: boolean;
   isDeleted: boolean;
 }
