@@ -1,9 +1,9 @@
 
 import { ApiError } from '../../utils/ApiError.js';
-
+import { CreateCustomerDto } from "./customer.types.js";
 import { findCustomerByEmail, createCustomer, getAllCustomer, countAllCustomer,findCustomerById } from './customer.repository.js';
 
-export const createCustomerService = async (data: any) => {
+export const createCustomerService = async ( data: CreateCustomerDto) => {
   const existing = await findCustomerByEmail(data.email);
   if (existing) throw new ApiError(409, 'Customer with this email already exists');
 
