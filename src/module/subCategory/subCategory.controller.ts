@@ -1,5 +1,5 @@
 import { asyncHandler } from "../../utils/AsyncHandler.js";
-import { createSubCategoryServices } from "./subCategory.services.js";
+import { createSubCategoryServices, getSubCategoryServices } from "./subCategory.services.js";
 import { CreateSubCategoryPayload } from "./subCategory.types.js";
 import { Request, Response} from "express";
 
@@ -15,4 +15,13 @@ export const createSubCategory = asyncHandler(async(req:Request, res:Response)=>
       success: true,
       data: result,
     });
+})
+
+export const getSubCategory =asyncHandler(async(req:Request, res:Response)=>{
+    const result = await getSubCategoryServices();
+      res.status(200).json({
+      success: true,
+      data: result,
+    });
+    
 })

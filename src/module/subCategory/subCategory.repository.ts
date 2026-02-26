@@ -12,3 +12,11 @@ export const createSubCategoryRepository = async (
 ) => {
   return SubCategory.create(data);
 };
+
+export const getSubCategoryRepository = async()=>{
+  return await SubCategory.find()
+}
+
+export const countAllSubCategory = async()=>{
+  return await SubCategory.countDocuments()
+}
