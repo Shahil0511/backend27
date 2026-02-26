@@ -1,6 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import router from "./module/auth/auth.routes.js";
 import customerRoute from "./module/customers/customer.routes.js"
+import categoryRoute from "./module/category/category.routes.js"
 import { errorMiddleware } from "./middleware/error.middleware.js";
 import cors from "cors";
 import helmet from "helmet";
@@ -30,6 +31,7 @@ app.get('/health', (_req: Request, res: Response) => {
 // API routes
 app.use('/api/auth', router);
 app.use('/api/customer',customerRoute)
+app.use('/api/category',categoryRoute )
 
 // 404 handler
 app.use((_req: Request, _res: Response, next: NextFunction) => {
