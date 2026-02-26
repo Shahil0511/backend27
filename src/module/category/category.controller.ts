@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { asyncHandler } from "../../utils/AsyncHandler.js";
-import { createCategoryServices } from "./category.services.js";
+import { createCategoryServices,getCategoryServices } from "./category.services.js";
 import { CreateCategoryPayload } from "./category.types.js";
 
 export const createCategory = asyncHandler(
@@ -18,3 +18,12 @@ export const createCategory = asyncHandler(
     });
   }
 );
+export const getCategory = asyncHandler(
+  async(req:Request, res:Response)=>{
+    const result = await getCategoryServices()
+     res.status(200).json({
+      success: true,
+      data: result,
+    });
+  }
+)

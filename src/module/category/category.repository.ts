@@ -6,3 +6,11 @@ export const categoryRepository = async (
 ) => {
   return await Category.create(data);
 };
+
+export const getCategoryRepository = async()=>{
+  return await Category.find()
+}
+
+export const countAllCategory = async()=>{
+  return await Category.countDocuments()
+}

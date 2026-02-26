@@ -2,7 +2,7 @@ import {
   CreateCategoryPayload,
   CreateCategoryRepoPayload,
 } from "./category.types.js";
-import { categoryRepository } from "./category.repository.js";
+import { categoryRepository,countAllCategory,getCategoryRepository } from "./category.repository.js";
 
 export const createCategoryServices = async (
   payload: CreateCategoryPayload
@@ -23,3 +23,14 @@ export const createCategoryServices = async (
 
   return result;
 };
+
+export const getCategoryServices=async()=>{
+  const [categories, total]=await Promise.all([
+    getCategoryRepository(),
+    countAllCategory()
+  ])
+  return {
+    data:categories,
+    total
+  };
+}
